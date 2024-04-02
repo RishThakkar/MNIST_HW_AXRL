@@ -1,6 +1,6 @@
 #include "functions.h"
 
-////////////////////////////////////////////////////////Weights addition function/////////////////////////////////////////////////
+////   Weights addition function            ///////////////////////////////////////////////////////////////////
 float* add_weights(int num_weights)
 {
     float *weight = (float *)malloc(num_weights * sizeof(float));
@@ -11,7 +11,7 @@ float* add_weights(int num_weights)
     }
     return weight;
 }
-////////////////////////////////////////////////////////Biases addition function/////////////////////////////////////////////////
+/////    Biases addition function       ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 float* add_biases(int num_biases) 
 {
@@ -24,7 +24,7 @@ float* add_biases(int num_biases)
     return bias;
 }
 
-////////////////////////////////////////////////////////basic questions about weights and bias function/////////////////////////////////////////////////
+/////    basic questions about weights and bias function            //////////////////////////////////////////////////////////////
 void basic_ques(int num_parameters, int num_weights, int num_biases)
 {
     printf("How many trainable parameters do you have: ");
@@ -49,8 +49,8 @@ void basic_ques(int num_parameters, int num_weights, int num_biases)
 }
 
 
-////////////////////////////////////////////////////////Read Image function/////////////////////////////////////////////////
-////Right now it is generating image not reading////////////////////////////////
+///////    Read Image function          ////////////////////////////////////////////////////////////////
+////     Right now it is generating image not reading           ////////////////////////////////
 void read_image(float image[IMAGE_HEIGHT][IMAGE_WIDTH])
 {
     srand(time(NULL));
@@ -65,24 +65,45 @@ void read_image(float image[IMAGE_HEIGHT][IMAGE_WIDTH])
     printf("Image generated \n");
 }
 
-//image is 42 x 42 so multiply 0th pixel with 1st address and 42nd pixel with 43rd address location
+//image is 42 x 42 so multiply 0th pixel with 0th address and 42nd pixel with 42nd address location
 //////////////////////////////Conv Block//////////////////////////////////////////////////////////
-void conv(float image[IMAGE_HEIGHT][IMAGE_WIDTH] , float *weights, float output[IMAGE_HEIGHT-1][IMAGE_WIDTH-1])
+void conv(float image[IMAGE_HEIGHT][IMAGE_WIDTH] , float *weights, float output[IMAGE_HEIGHT-2][IMAGE_WIDTH-2])
 {
 
     for(int i=0;i<IMAGE_HEIGHT;i++)
     {
         for(int j =0;j<IMAGE_WIDTH;j++)
         {
+            static int k = 0;   //this is for weights address
             float mac_res = 0.0;
 
-            mac_res += image[i][j] * weights[0];
-            mac_res += image[i][j+1] * weights[1];
-            mac_res += image[i+1][j] * weights[2];
-            mac_res += image[i+1][j+1] * weights[3];
+            mac_res += image[i][j] * weights[k];            //0,0 with 0th
+            mac_res += image[i][j+1] * weights[k+1];        //0,1 with 1st
+            mac_res += image[i][j+2] * weights[k+2];        //0,2 with 2nd
+            mac_res += image[i+1][j] * weights[k+42];       //1,0 with 42nd
+            mac_res += image[i+1][j+1] * weights[k+43];     //1,1 with 43rd    
+            mac_res += image[i+1][j+2] * weights[k+44];
+            mac_res += image[i+2][j] * weights[k+84];       //2,0 with 84th
+            mac_res += image[i+2][j+1] * weights[k+85];
+            mac_res += image[i+2][j+2] * weights[k+86];
+
+
+            k++;
 
             output[i][j] = mac_res;
         }
+    }
+
+    printf("Convolution Output:\n");
+    printf("Conv output Size: %dx%d\n", IMAGE_HEIGHT - 2, IMAGE_WIDTH - 2); 
+
+    for (int i = 0; i < IMAGE_HEIGHT - 2; i++) 
+    {
+        for (int j = 0; j < IMAGE_WIDTH - 2; j++) 
+        {
+            printf("%2.6f\t", output[i][j]); 
+        }
+        printf("\n");
     }
 }
 

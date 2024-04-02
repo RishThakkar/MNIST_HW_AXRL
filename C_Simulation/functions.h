@@ -11,8 +11,8 @@ float* add_biases(int num_biases);
 
 void read_image(float image[IMAGE_HEIGHT][IMAGE_WIDTH]);
 
-void conv(float image[IMAGE_HEIGHT][IMAGE_WIDTH] , float *weights, float output[IMAGE_HEIGHT-1][IMAGE_WIDTH-1]);
-
+void conv(float image[IMAGE_HEIGHT][IMAGE_WIDTH] , float *weights, float output[IMAGE_HEIGHT-2][IMAGE_WIDTH-2]);
+// void conv(float, float *, float);
 // void basic_ques(int num_parameters, int num_weights, int num_biases);
 
 

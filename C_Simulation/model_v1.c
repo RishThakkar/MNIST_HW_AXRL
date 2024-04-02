@@ -11,6 +11,7 @@ int main()
     int num_biases;
 
     float image[IMAGE_HEIGHT][IMAGE_WIDTH];
+    float conv_out[IMAGE_HEIGHT-2][IMAGE_WIDTH-2];
 
 while(1)
 {
@@ -61,6 +62,9 @@ while(1)
     srand(time(NULL));
     read_image(image);
 
+//////////////////////////////   Convolution of the image with weights    ///////////////////////
+
+    conv(image, weights, conv_out);
 
 
 //last step- free the memory
