@@ -11,7 +11,11 @@ int main()
     int num_biases;
 
     float image[IMAGE_HEIGHT][IMAGE_WIDTH];
-    float conv_out[IMAGE_HEIGHT-2][IMAGE_WIDTH-2];
+    float conv1_out[IMAGE_HEIGHT-2][IMAGE_WIDTH-2];
+    float relu1_out[IMAGE_HEIGHT-2][IMAGE_WIDTH-2];
+    float maxpool1_out[20][20];
+
+    float conv2_out[18][18];
 
 while(1)
 {
@@ -64,8 +68,13 @@ while(1)
 
 //////////////////////////////   Convolution of the image with weights    ///////////////////////
 
-    conv(image, weights, conv_out);
+    conv(image, weights, conv1_out);
 
+    relu(conv1_out, relu1_out);
+
+    max_pool(relu1_out, maxpool1_out);
+
+    conv(maxpool1_out, weights, conv2_out);
 
 //last step- free the memory
     free(weights);

@@ -93,17 +93,79 @@ void conv(float image[IMAGE_HEIGHT][IMAGE_WIDTH] , float *weights, float output[
             output[i][j] = mac_res;
         }
     }
+    printf("Convolution done\n");
 
-    printf("Convolution Output:\n");
-    printf("Conv output Size: %dx%d\n", IMAGE_HEIGHT - 2, IMAGE_WIDTH - 2); 
+    // printf("Convolution Output:\n");
+    printf("Conv output Size: %dx%d\n", IMAGE_HEIGHT-2, IMAGE_WIDTH - 2); 
 
-    for (int i = 0; i < IMAGE_HEIGHT - 2; i++) 
-    {
-        for (int j = 0; j < IMAGE_WIDTH - 2; j++) 
-        {
-            printf("%2.6f\t", output[i][j]); 
-        }
-        printf("\n");
-    }
+    // for (int i=0; i<IMAGE_HEIGHT-2; i++) 
+    // {
+    //     for (int j=0; j<IMAGE_WIDTH - 2; j++) 
+    //     {
+    //         printf("%2.6f\t", output[i][j]); 
+    //     }
+    //     printf("\n");
+    // }
 }
 
+
+
+////////////////////////// ReLU ///////////////////////////////////
+
+void relu(float input[IMAGE_HEIGHT-2][IMAGE_WIDTH-2], float output[IMAGE_HEIGHT-2][IMAGE_WIDTH-2]) 
+{
+    for (int i=0; i<IMAGE_HEIGHT-2; i++) 
+    {
+        for (int j=0; j<IMAGE_WIDTH-2; j++) 
+        {
+            output[i][j] = input[i][j] > 0 ? input[i][j] : 0; // ReLU 
+        }
+    }
+
+    printf("ReLU Done\n");
+    // printf("ReLU output \n");
+    printf("ReLU output Size: %dx%d\n", IMAGE_HEIGHT-2, IMAGE_WIDTH-2); 
+    // for(int i=0;i<IMAGE_HEIGHT-2;i++)
+    // {
+    //     for (int j=0;j<IMAGE_WIDTH-2;j++)
+    //     {
+    //         printf("%2.6f\t", output[i][j]);
+    //     }
+    // }
+    // printf("\n");
+}
+
+/////  Max Pooling   //////////////////////////////////////////
+
+
+void max_pool(float input[IMAGE_HEIGHT-2][IMAGE_WIDTH-2], float output[(IMAGE_HEIGHT-2)/2][(IMAGE_WIDTH-2)/2])
+{
+    for (int i=0; i<IMAGE_HEIGHT-2;i++)
+    {
+        for (int j=0;j<IMAGE_WIDTH-2;j++)
+        {
+            float max = input[i][j];
+            max = (input[i][j+1] > max)? input[i][j+1] : max;
+            max = (input[i+1][j] > max)? input[i+1][j] : max;
+            max = (input[i+1][j+1] > max)? input[i+1][j+1] : max;
+
+            output[i][j] = max;
+            // output[i][j] = max(input[i][j], input[i][j+1], input[i+1][j], input[i+1][j+1]);
+        }
+    }
+
+    printf("Max Pool Done\n");
+    // printf("Max Pool output \n");
+    // printf("Max Pool output Size: %dx%d\n", (IMAGE_HEIGHT-2)/2, (IMAGE_WIDTH-2)/2); 
+    // for(int i=0;i<(IMAGE_HEIGHT-2)/2;i++)
+    // {
+    //     for (int j=0;j<(IMAGE_WIDTH-2)/2;j++)
+    //     {
+    //         printf("%2.6f\t", output[i][j]);
+    //     }
+    // }
+    // printf("\n");
+
+    current_height = (current_height - 2) / 2;
+    current_width = (current_width - 2) / 2;
+}
