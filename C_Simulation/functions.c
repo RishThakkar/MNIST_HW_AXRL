@@ -150,7 +150,6 @@ void max_pool(float input[IMAGE_HEIGHT-2][IMAGE_WIDTH-2], float output[(IMAGE_HE
             max = (input[i+1][j+1] > max)? input[i+1][j+1] : max;
 
             output[i][j] = max;
-            // output[i][j] = max(input[i][j], input[i][j+1], input[i+1][j], input[i+1][j+1]);
         }
     }
 
@@ -166,6 +165,4 @@ void max_pool(float input[IMAGE_HEIGHT-2][IMAGE_WIDTH-2], float output[(IMAGE_HE
     // }
     // printf("\n");
 
-    current_height = (current_height - 2) / 2;
-    current_width = (current_width - 2) / 2;
 }
