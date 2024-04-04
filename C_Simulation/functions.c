@@ -74,21 +74,17 @@ void conv(float image[IMAGE_HEIGHT][IMAGE_WIDTH] , float *weights, float output[
     {
         for(int j =0;j<IMAGE_WIDTH;j++)
         {
-            static int k = 0;   //this is for weights address
             float mac_res = 0.0;
 
-            mac_res += image[i][j] * weights[k];            //0,0 with 0th
-            mac_res += image[i][j+1] * weights[k+1];        //0,1 with 1st
-            mac_res += image[i][j+2] * weights[k+2];        //0,2 with 2nd
-            mac_res += image[i+1][j] * weights[k+42];       //1,0 with 42nd
-            mac_res += image[i+1][j+1] * weights[k+43];     //1,1 with 43rd    
-            mac_res += image[i+1][j+2] * weights[k+44];
-            mac_res += image[i+2][j] * weights[k+84];       //2,0 with 84th
-            mac_res += image[i+2][j+1] * weights[k+85];
-            mac_res += image[i+2][j+2] * weights[k+86];
-
-
-            k++;
+            mac_res += image[i][j] * weights[0];            
+            mac_res += image[i][j+1] * weights[1];        
+            mac_res += image[i][j+2] * weights[2];        
+            mac_res += image[i+1][j] * weights[3];       
+            mac_res += image[i+1][j+1] * weights[4];         
+            mac_res += image[i+1][j+2] * weights[5];
+            mac_res += image[i+2][j] * weights[6];       
+            mac_res += image[i+2][j+1] * weights[7];
+            mac_res += image[i+2][j+2] * weights[8];
 
             output[i][j] = mac_res;
         }
