@@ -27,7 +27,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
                     mac_res += weights[weights_address + i + 36];
 
-                    out[out_index + i * 40 * 40] = (mac_res > 0) ? mac_res : 0;
+                    out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
                 }
             } 
@@ -40,7 +40,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
         for (int i = 0; i < 4; i++)          //Now here the image is the out of the previous layer
         {
-            for (int j = 0; j < 40 * 40; j += 2)
+            for (int j = 0; j < 40 * 38; j += 2)
             {
                 float max;
 
@@ -84,7 +84,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
                     }
 
-                    out[out_index + i * 18 * 18] = (mac_res > 0) ? mac_res : 0;
+                    out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
                 }
             }
@@ -119,9 +119,16 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
         {
             float mac_res = 0.0;
 
-            for (int j = 0; j < 9 * 9; j++)
+            for (int j = 0; j < 4; j++)
             {
-                mac_res += data[data_address + j] * weights[weights_address + (j * 10) + i];            
+
+                for (int k = 0; k < 9 * 9; k++){
+
+                    mac_res += data[data_address + k + (j * 9 * 9)] * weights[weights_address + (k + (j * 9 * 9)) * 10 + i];   
+
+                }
+
+                         
             }
 
             mac_res += weights[weights_address + i + X];
