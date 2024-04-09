@@ -162,3 +162,69 @@ void max_pool(float input[IMAGE_HEIGHT-2][IMAGE_WIDTH-2], float output[(IMAGE_HE
     // printf("\n");
 
 }
+
+//////////////////   HARDWARE MODULE    ///////////////////////////////
+
+
+void hardware(float *weights_bias, int weight_add, int weight_size, int image_add, int image_size, float *image, int layer_index, float *out)
+{
+    if(layer_index == 0)    //Conv1 and RELU
+    {
+        for (int i = 0 ; i < 4 ; i++)  
+        {
+            for (int j = 0 ; j<image_size ; j++)  //output size will be 40x40
+            {
+                float mac_res = 0.0;
+
+                mac_res += image[image_add+j] * weights_bias[weight_add+i];            
+                mac_res += image[image_add+j+1] * weights_bias[weight_add+i+4];        
+                mac_res += image[image_add+j+2] * weights_bias[weight_add+i+8];        
+                mac_res += image[image_add+j+42] * weights_bias[weight_add+i+12];       
+                mac_res += image[image_add+j+43] * weights_bias[weight_add+i+16];         
+                mac_res += image[image_add+j+44] * weights_bias[weight_add+i+20];
+                mac_res += image[image_add+j+84] * weights_bias[weight_add+i+24];       
+                mac_res += image[image_add+j+85] * weights_bias[weight_add+i+28];
+                mac_res += image[image_add+j+86] * weights_bias[weight_add+i+32];
+
+                out[(j+i)*image_size] = mac_res;
+            }
+            
+        }
+        for(int i = 0; i < 4 ; i++)
+        {
+            for (int j = 0; j < image_size; j++)
+            {
+                out[(j+i)*image_size]  = (out[(j+i)*image_size] > 0) ? out[(j+i)*image_size] : 0;
+            }
+        }
+    }
+
+
+
+    else if(layer_index == 1)       // Max Pool 1
+    {   
+        for(int i =0; i<4;i++)          //Now here the image is the out of the previous layer
+        {
+            for(int j =0;j<image_size;j++)
+            {
+                float max = image[image_add+j];
+                max = (image[image_add+j+1] > max)? image[image_add+j+1] : max;
+                max = (image[image_add+j+40] > max)? image[image_add+j+40] : max;
+                max = (image[image_add+j+41] > max)? image[image_add+j+41] : max;
+
+                out[(j+i)*image_size] = max;
+            }
+        }
+    }
+
+    else if(layer_index == 2)       //Conv 2 and ReLU
+    {
+        for(int i =0; i<4;i++)
+        {
+            for (int j= 0;j<6400;j++)
+            {
+
+            }
+        }
+    }
+}
