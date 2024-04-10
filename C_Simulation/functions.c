@@ -185,7 +185,7 @@ void printFeatureMaps(float *arr, int height, int width, int channels) {
             printf("[ ");
             for (int j = 0; j < width; ++j) {
                 int index = c * height * width + i * width + j;
-                printf("%.2f", arr[index]);
+                printf("%f", arr[index]);
                 if (j != width - 1) {
                     printf(", ");
                 }

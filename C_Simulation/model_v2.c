@@ -143,7 +143,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 int main()
 {
     HW(weights_bias, 0, 40, image, 0, 1764, 0 , out);
-    // printFeatureMaps(out, 40, 40 , 4);
+    printFeatureMaps(out, 40, 40 , 4);
     saveFeatureMaps(out, 40, 40, 4, "C_program_out_conv.txt");
 
     return 0;
