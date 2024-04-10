@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <functions.c>
+#include "functions.c"
+
 
 void HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
 {
@@ -131,7 +132,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                          
             }
 
-            mac_res += weights[weights_address + i + X];
+            mac_res += weights[weights_address + i ];
 
             out[i] = (mac_res > 0) ? mac_res : 0;
     
@@ -141,6 +142,9 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
 int main()
 {
-    read_image(image);
+    HW(weights_bias, 0, 40, image, 0, 1764, 0 , out);
+    // printFeatureMaps(out, 40, 40 , 4);
+    saveFeatureMaps(out, 40, 40, 4, "C_program_out_conv.txt");
+
     return 0;
 }
