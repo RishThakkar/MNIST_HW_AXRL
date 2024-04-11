@@ -67,9 +67,13 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
         for (int i = 0; i < 4; i++)
         {
+            int count = 0;
             for (int j = 0; j < 20 * 20; j++)
             {
-                if ((j % 18 != 0) && (j % 19 != 0))
+                if ((j - 20*count) / 20 == 1) count++;
+
+                if ((((j % (20*count + 18) != 0) && (j % (20*count + 19) != 0)) || (j == 0)) && (count <=17))
+                // if ((j % 18 != 0) && (j % 19 != 0))
                 {  
                     float mac_res = 0.0;
 
@@ -149,7 +153,7 @@ int main()
 {
     HW(weights_bias, 0, 40, image, 0, 1764, 0 , out);
     printFeatureMaps(out, 40, 40 , 4);
-    saveFeatureMaps(out, 40, 40, 4, "C_program_out_conv.txt");
+    saveFeatureMaps(out, 40, 40, 4, "C_program_out_conv2.txt");
 
     return 0;
 }
