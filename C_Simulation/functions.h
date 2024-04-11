@@ -109,6 +109,7 @@ float max1out[1600] = {0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0
 
 
 float conv2out[1296] = {1};
+float max1out_real[1600];
 
 float* add_weights(int num_weights);
 float* add_biases(int num_biases);

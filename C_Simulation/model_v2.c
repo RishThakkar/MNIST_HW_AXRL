@@ -46,16 +46,21 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
         for (int i = 0; i < 4; i++)          //Now here the image is the out of the previous layer
         {
-            for (int j = 0; j < 40 * 38; j += 2)
+            for (int j = 0; j < 40 * 20; j += 2)
             {
+
+                //if (i == 0) 
+                //    printf("%d\n", (j % 40) + (j - (j % 40)) * 2);
+                    
+                //printf("%d\n", out_index);
                 float max;
 
-                max =  data[data_address + (j % 40) + (j / 40 + 1) * 40     ];
-                max = (data[data_address + (j % 40) + (j / 40 + 1) * 40 +  1] > max) ? data[data_address + (j % 40) + (j / 40 + 1) * 40 +  1 +  1] : max;
-                max = (data[data_address + (j % 40) + (j / 40 + 1) * 40 + 40] > max) ? data[data_address + (j % 40) + (j / 40 + 1) * 40 +  1 + 40] : max;
-                max = (data[data_address + (j % 40) + (j / 40 + 1) * 40 + 41] > max) ? data[data_address + (j % 40) + (j / 40 + 1) * 40 +  1 + 41] : max;
+                max =  data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2     ];
+                max = (data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 +  1] > max) ? data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 +  1] : max;
+                max = (data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 + 40] > max) ? data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 + 40] : max;
+                max = (data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 + 41] > max) ? data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 + 41] : max;
 
-                out[out_index + i * 20 * 20] = max;
+                out[out_index] = max;
                 out_index++;
             }
         }
@@ -151,9 +156,12 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
 int main()
 {
+
     HW(weights_bias, 0, 40, image, 0, 1764, 0 , conv1out);
+    HW(weights_bias, 0, 40, conv1out, 0, 0, 1 , max1out_real);
     HW(weights_bias, 40, 144, max1out, 0, 1600, 2, conv2out);
     saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
+    saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
     saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
 
     return 0;
