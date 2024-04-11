@@ -210,7 +210,7 @@ void saveFeatureMaps(float *arr, int height, int width, int channels, const char
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
                 int index = c * height * width + i * width + j;
-                fprintf(file, "%.2f", arr[index]);
+                fprintf(file, "%0.2f", arr[index]);
                 if (j != width - 1) {
                     fprintf(file, ", ");
                 }

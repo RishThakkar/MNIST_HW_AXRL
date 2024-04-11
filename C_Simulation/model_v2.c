@@ -151,9 +151,10 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
 int main()
 {
-    HW(weights_bias, 0, 40, image, 0, 1764, 0 , out);
-    printFeatureMaps(out, 40, 40 , 4);
-    saveFeatureMaps(out, 40, 40, 4, "C_program_out_conv2.txt");
+    HW(weights_bias, 0, 40, image, 0, 1764, 0 , conv1out);
+    HW(weights_bias, 40, 144, max1out, 0, 1600, 2, conv2out);
+    saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
+    saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
 
     return 0;
 }
