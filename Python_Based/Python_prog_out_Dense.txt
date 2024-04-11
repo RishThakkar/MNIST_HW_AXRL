@@ -1,0 +1,10 @@
+Neuron 1: 0.00
+Neuron 2: 0.00
+Neuron 3: 0.00
+Neuron 4: 547047.25
+Neuron 5: 0.00
+Neuron 6: 7207.13
+Neuron 7: 0.00
+Neuron 8: 0.00
+Neuron 9: 23648.21
+Neuron 10: 0.00
