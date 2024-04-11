@@ -182,7 +182,6 @@ void printFeatureMaps(float *arr, int height, int width, int channels) {
     for (int c = 0; c < channels; ++c) {
         printf("Channel %d:\n", c + 1);
         for (int i = 0; i < height; ++i) {
-            printf("[ ");
             for (int j = 0; j < width; ++j) {
                 int index = c * height * width + i * width + j;
                 printf("%f", arr[index]);
@@ -190,7 +189,7 @@ void printFeatureMaps(float *arr, int height, int width, int channels) {
                     printf(", ");
                 }
             }
-            printf(" ]\n");
+            printf("\n");
         }
         printf("\n");
     }
@@ -209,7 +208,6 @@ void saveFeatureMaps(float *arr, int height, int width, int channels, const char
     for (int c = 0; c < channels; ++c) {
         fprintf(file, "Channel %d:\n", c + 1);
         for (int i = 0; i < height; ++i) {
-            fprintf(file, "[ ");
             for (int j = 0; j < width; ++j) {
                 int index = c * height * width + i * width + j;
                 fprintf(file, "%.2f", arr[index]);
@@ -217,7 +215,7 @@ void saveFeatureMaps(float *arr, int height, int width, int channels, const char
                     fprintf(file, ", ");
                 }
             }
-            fprintf(file, " ]\n");
+            fprintf(file, "\n");
         }
         fprintf(file, "\n");
     }

@@ -10,9 +10,13 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
         for (int i = 0 ; i < 4 ; i++)  
         {
+            int count = 0;
             for (int j = 0 ; j < 42 * 42; j++)  //output size will be 40x40
             {
-                if ((j % 40 != 0) && (j % 41 != 0))
+                if ((j - 42*count) / 42 == 1) count++;
+
+                if ((((j % (42*count + 40) != 0) && (j % (42*count + 41) != 0)) || (j == 0)) && (count <=39)) 
+                //if (((j % 40 != 0) && (j % 41 != 0)) || (j == 0))
                 { 
                     float mac_res = 0.0;
 
@@ -31,6 +35,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                     out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
                 }
+
             } 
         }
     }
