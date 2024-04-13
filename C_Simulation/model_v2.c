@@ -15,8 +15,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
             {
                 if ((j - 42*count) / 42 == 1) count++;
 
-                if ((((j % (42*count + 40) != 0) && (j % (42*count + 41) != 0)) || (j == 0)) && (count <=39)) 
-                //if (((j % 40 != 0) && (j % 41 != 0)) || (j == 0))
+                if ((((j % (42*count + 40) != 0) && (j % (42*count + 41) != 0)) || (j == 0)) && (count < 40)) 
                 { 
                     float mac_res = 0.0;
 
@@ -48,11 +47,6 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
         {
             for (int j = 0; j < 40 * 20; j += 2)
             {
-
-                //if (i == 0) 
-                //    printf("%d\n", (j % 40) + (j - (j % 40)) * 2);
-                    
-                //printf("%d\n", out_index);
                 float max;
 
                 max =  data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2     ];
@@ -77,8 +71,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
             {
                 if ((j - 20*count) / 20 == 1) count++;
 
-                if ((((j % (20*count + 18) != 0) && (j % (20*count + 19) != 0)) || (j == 0)) && (count <=17))
-                // if ((j % 18 != 0) && (j % 19 != 0))
+                if ((((j % (20*count + 18) != 0) && (j % (20*count + 19) != 0)) || (j == 0)) && (count < 18))
                 {  
                     float mac_res = 0.0;
 
@@ -136,28 +129,17 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
             for (int j = 0; j < 4; j++)
             {
-                if (i == 0) printf("Frame %d\n\n\n", j);
-                
-                for (int k = 0; k < 9 * 9; k++){
-
-                    //if (j == 1 && i == 0) printf("%f\n",  data[data_address + k + (j * 9 * 9)]);
-                    if (i == 0) printf("%f\n", data[data_address + k + (j * 9 * 9)]);
-                    //if (i == 0) printf("%f\n", weights[weights_address + (j * 9 * 9) * (10) + (k * 40) + i]);
-                    if (i == 0) printf("%f\n", weights[weights_address +  (j * 10) + (k * 40) + i]);
-
-                    //mac_res += data[data_address + k + (j * 9 * 9)] * weights[weights_address + (j * 9 * 9) * (10) + (k * 40) + i];   
+                for (int k = 0; k < 9 * 9; k++)
+                {
                     mac_res += data[data_address + k + (j * 9 * 9)] * weights[weights_address + (j * 10) + (k * 40) + i];   
                 }
 
                          
             }
 
-            //printf("%f\n", mac_res);
             mac_res += weights[weights_address + 3240 + i];
-            //printf("%d\n",weights_address + 3240 + i);
 
             out[i] = (mac_res > 0) ? mac_res : 0;
-            //printf("%f\n", out[i]);
     
         }
     }
@@ -168,7 +150,7 @@ int main()
 
     HW(weights_bias, 0, 40, image, 0, 1764, 0 , conv1out);
     HW(weights_bias, 0, 0, conv1out, 0, 0, 1 , max1out_real);
-    HW(weights_bias, 40, 148, max1out, 0, 1600, 2, conv2out);
+    HW(weights_bias, 40, 148, max1out_real, 0, 1600, 2, conv2out);
     HW(weights_bias, 0, 0, conv2out, 0, 0, 3 , max2out_real);
     HW(weights_bias, 188, 0, max2out_real, 0, 0, 4, dense_out);
     
@@ -177,9 +159,6 @@ int main()
     saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
     saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
     saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
-
-    //printf("%f\n", max2out_real[0]);
-    //printf("%f\n", max2out_real[1]);
 
     return 0;
 }

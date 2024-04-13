@@ -3,7 +3,6 @@
 //////////////////   HARDWARE MODULE    ///////////////////////////////
 
 
-
 void printArray(float *arr, int size) {
     printf("[ ");
     for (int i = 0; i < size; ++i) {
@@ -31,8 +30,6 @@ void printFeatureMaps(float *arr, int height, int width, int channels) {
         printf("\n");
     }
 }
-
-
 
 
 void saveFeatureMaps(float *arr, int height, int width, int channels, const char *filename) {
