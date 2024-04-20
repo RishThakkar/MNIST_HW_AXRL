@@ -1,0 +1,223 @@
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+#include "functions.h"
+
+void converter(float num)
+{
+    if(num >= -4)
+    {
+        int int_part = (int) num;
+        // printf("Integer Part = %d ", int_part);
+
+        float frac_part = num - int_part;
+
+        frac_part = fabs(frac_part);
+
+        if(num < 0 && num > -1)
+            frac_part = 1 - frac_part;
+
+        else if(num < -1 && num > -2)
+            frac_part = 1 - frac_part;
+        
+        else if(num < -2 && num > -3)
+            frac_part = 1 - frac_part;
+        
+        else if(num < -3 && num > -4)
+            frac_part = 1 - frac_part;
+            
+
+        // printf("Frac_part = %f\n", frac_part);
+
+        if(num < 0)
+        {
+            printf("1");
+            num = num + 4;
+            if(num >= 2)
+            {
+                printf("1");
+                num = num-2;
+            }
+            else
+                printf("0");
+            
+            if(num >=1)
+            {
+                printf("1");
+                num = num-1;
+            }
+            else    
+                printf("0");
+        }
+
+        else if(num >= 0)
+        {
+            printf("0");
+
+            if(num >=2)
+            {
+                printf("1");
+                num = num -2;
+            }
+            else    
+                printf("0");
+
+            if(num>=1)
+            {
+                printf("1");
+                num = num-1;
+            }
+            else
+                printf("0");
+        }
+
+        // if(int_part == -4)
+        //     printf("100");
+        // else if(int_part == -3)
+        //     printf("101");
+        // else if(int_part == -2)
+        //     printf("110");
+        // else if(int_part == -1)
+        //     printf("111");
+        // else if(int_part == 1)
+        //     printf("001");
+        // else if(int_part == 2)
+        //     printf("010");
+        // else if(int_part == 3)
+        //     printf("011");
+        // else    
+        //     printf("000");
+
+        // printf(".");
+
+        if(frac_part >= 0.5)
+        {
+            printf("1");
+            frac_part = frac_part - 0.5;
+        }   
+        else    
+            printf("0");
+        
+        if(frac_part >= 0.25)
+        {
+            printf("1");
+            frac_part = frac_part - 0.25;
+        }
+        else    
+            printf("0");
+
+        if(frac_part >= 0.125)
+        {
+            printf("1");
+            frac_part = frac_part - 0.125;
+        }
+        else    
+            printf("0");
+
+        if(frac_part >= 0.0625)
+        {
+            printf("1");
+            frac_part = frac_part - 0.0625;
+        }
+        else    
+            printf("0");
+
+        if(frac_part >= 0.03125)
+        {
+            printf("1");
+            frac_part = frac_part - 0.03125;
+        }
+        else    
+            printf("0");
+ 
+    }
+}
+
+
+void weightarray(float arr[], int len) 
+{
+   FILE *file = fopen("binary_weights.txt", "w");
+    if (file == NULL) 
+    {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    freopen("binary_weights.txt", "w", stdout);
+
+    for (int i = 0; i < len; i++) 
+    {
+        // printf("Converting %f: ", arr[i]);
+        converter(arr[i]);
+        printf("\n");
+    }
+
+    freopen("/dev/tty", "w", stdout);
+    fclose(file); 
+}
+
+
+int main()
+{
+    converter(-4);
+    printf("\n");
+    converter(-3);
+    printf("\n");
+    converter(-2);
+    printf("\n");
+    converter(-1);
+    printf("\n");
+    converter(0);
+    printf("\n");
+    converter(1);
+    printf("\n");
+    converter(2);
+    printf("\n");
+    converter(3);
+    printf("\n");
+    printf("\n");
+
+    converter(0.5);
+    printf("\n");
+    converter(-0.5);
+    printf("\n");
+    converter(-1.5);
+    printf("\n");
+    converter(-0.125);
+    printf("\n");
+    converter(-1.25);
+    printf("\n");
+    converter(-0.25);
+    printf("\n");
+    converter(-1.25);
+    printf("\n");
+    converter(-2.25);
+    printf("\n");
+    converter(-3.25);
+    printf("\n");
+    printf("\n");
+
+    converter(1.8748094);
+    printf("\n");
+    converter(-1.8748094);
+    printf("\n");
+
+    printf("Below values are from actual weights\n");
+    converter(0.14475057);
+    printf("\n");
+    converter(-0.21379876);
+    printf("\n");
+    converter(0.2594401);
+    printf("\n");
+    converter(-3.3419926);
+    printf("\n");
+    converter(0.8656526);
+    printf("\n");
+    converter(2.022736);
+    printf("\n");
+    
+    int len = sizeof(weights_bias) / sizeof(weights_bias[0]);
+    weightarray(weights_bias, len);
+
+    return 0;
+}
