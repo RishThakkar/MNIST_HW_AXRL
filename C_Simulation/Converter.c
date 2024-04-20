@@ -156,6 +156,28 @@ void weightarray(float arr[], int len)
     fclose(file); 
 }
 
+void imagearray(float arr[], int len) 
+{
+   FILE *file = fopen("binary_image.txt", "w");
+    if (file == NULL) 
+    {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    freopen("binary_image.txt", "w", stdout);
+
+    for (int i = 0; i < len; i++) 
+    {
+        // printf("Converting %f: ", arr[i]);
+        converter(arr[i]);
+        printf("\n");
+    }
+
+    freopen("/dev/tty", "w", stdout);
+    fclose(file); 
+}
+
 
 int main()
 {
@@ -218,6 +240,9 @@ int main()
     
     int len = sizeof(weights_bias) / sizeof(weights_bias[0]);
     weightarray(weights_bias, len);
+
+    int imglen = sizeof(image) / sizeof(image[0]);
+    imagearray(image, imglen);
 
     return 0;
 }

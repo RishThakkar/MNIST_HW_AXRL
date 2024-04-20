@@ -2,7 +2,7 @@
 #include "functions.c"
 
 
-void HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
+void HW_FP(int *weights, int weights_address, int weights_size, int *data, int data_address, int data_size,  int layer_index, int *out)
 {
     if (layer_index == 0)    // Convolution & ReLU
     {
@@ -17,7 +17,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 
                 if ((((j % (42*count + 40) != 0) && (j % (42*count + 41) != 0)) || (j == 0)) && (count < 40)) 
                 { 
-                    float mac_res = 0.0;
+                    int mac_res = 0.0;
 
                     mac_res += data[data_address + j     ] * weights[weights_address + i     ];            
                     mac_res += data[data_address + j +  1] * weights[weights_address + i +  4];        
@@ -30,6 +30,9 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
                     mac_res += weights[weights_address + i + 36];
+                    
+                    mac_res = (mac_res >> 3) & 0xFF;  // Shift right by 3 and mask out all but the lower 8 bits
+
 
                     out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
