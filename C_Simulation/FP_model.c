@@ -2,7 +2,7 @@
 #include "functions.c"
 
 
-void HW_FP(int *weights, int weights_address, int weights_size, int *data, int data_address, int data_size,  int layer_index, int *out)
+void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data, int data_address, int data_size,  int layer_index, int8_t *out)
 {
     if (layer_index == 0)    // Convolution & ReLU
     {
@@ -17,7 +17,7 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
 
                 if ((((j % (42*count + 40) != 0) && (j % (42*count + 41) != 0)) || (j == 0)) && (count < 40)) 
                 { 
-                    int mac_res = 0.0;
+                    int16_t mac_res = 0b0000000000000000;
 
                     mac_res += data[data_address + j     ] * weights[weights_address + i     ];            
                     mac_res += data[data_address + j +  1] * weights[weights_address + i +  4];        
@@ -31,10 +31,10 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
 
                     mac_res += weights[weights_address + i + 36];
                     
-                    mac_res = (mac_res >> 3) & 0xFF;  // Shift right by 3 and mask out all but the lower 8 bits
+                    mac_res = (mac_res >> 5);  // Shift right by 5 
 
 
-                    out[out_index] = (mac_res > 0) ? mac_res : 0;
+                    out[out_index] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
                     out_index++;
                 }
 
@@ -50,7 +50,7 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
         {
             for (int j = 0; j < 40 * 20; j += 2)
             {
-                float max;
+                int8_t max;
 
                 max =  data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2     ];
                 max = (data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 +  1] > max) ? data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 +  1] : max;
@@ -76,7 +76,7 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
 
                 if ((((j % (20*count + 18) != 0) && (j % (20*count + 19) != 0)) || (j == 0)) && (count < 18))
                 {  
-                    float mac_res = 0.0;
+                    int16_t mac_res = 0b0000000000000000;
 
                     for (int k = 0; k < 4; k++) 
                     {
@@ -95,7 +95,9 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
 
                     }
 
-                    out[out_index] = (mac_res > 0) ? mac_res : 0;
+                    mac_res = (mac_res >> 5);  // Shift right by 5
+
+                    out[out_index] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
                     out_index++;
                 }
             }
@@ -110,7 +112,7 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
         {
             for (int j = 0; j < 18 * 9; j += 2)
             {
-                float max;
+                int8_t max;
 
                 max =  data[data_address + i * 18 * 18 + (j % 18) + (j - (j % 18)) * 2     ];
                 max = (data[data_address + i * 18 * 18 + (j % 18) + (j - (j % 18)) * 2 +  1] > max) ? data[data_address + i * 18 * 18 + (j % 18) + (j - (j % 18)) * 2 +  1] : max;
@@ -128,40 +130,49 @@ void HW_FP(int *weights, int weights_address, int weights_size, int *data, int d
 
         for (int i = 0; i < 10; i++)
         {
-            float mac_res = 0.0;
+            int16_t mac_res = 0b0000000000000000;
 
             for (int j = 0; j < 4; j++)
             {
                 for (int k = 0; k < 9 * 9; k++)
                 {
                     mac_res += data[data_address + k + (j * 9 * 9)] * weights[weights_address + (j * 10) + (k * 40) + i];   
-                }
-
-                         
+                }        
             }
 
             mac_res += weights[weights_address + 3240 + i];
 
-            out[i] = (mac_res > 0) ? mac_res : 0;
+            mac_res = (mac_res >> 5);  // Shift right by 5
+
+            out[i] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
     
         }
     }
 }
 
 int main()
-{
-    // HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
-    HW(weights_bias, 0, 40, image, 0, 1764, 0 , conv1out);
-    HW(weights_bias, 0, 0, conv1out, 0, 0, 1 , max1out_real);
-    HW(weights_bias, 40, 148, max1out_real, 0, 1600, 2, conv2out);
-    HW(weights_bias, 0, 0, conv2out, 0, 0, 3 , max2out_real);
-    HW(weights_bias, 188, 0, max2out_real, 0, 0, 4, dense_out);
-    
-    saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
-    saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
-    saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
-    saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
-    saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
+{    
+    HW_FP(binary_weights_bias, 0, 40, binary_image, 0, 1764, 0, conv1out_FP);
+    HW_FP(binary_weights_bias, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
+    HW_FP(binary_weights_bias, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+    HW_FP(binary_weights_bias, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+    HW_FP(binary_weights_bias, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+    // for(int i =0; i<6400;i++)
+    // {
+    //     print_binary_8(conv1out_FP[i]);
+    //     printf("\n");
+    // }
+    // printArray_Binary(conv1out_FP, conv1_out_size);
+    saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
+    saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
+    saveBinaryFeatureMaps(conv2out_FP, 18, 18, 4, "Binary_C_conv2_out.txt");    
+    saveBinaryFeatureMaps(max2out_real_FP, 9, 9, 4, "Binary_C_max2_out.txt"); 
+    saveBinaryFeatureMaps(dense_out_FP, 10, 1, 1, "Binary_C_dense_out.txt"); 
+    // saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
+    // saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
+    // saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
+    // saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
+    // saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
 
     return 0;
 }

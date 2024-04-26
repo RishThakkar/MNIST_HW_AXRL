@@ -28,7 +28,8 @@ void converter(float num)
             
 
         // printf("Frac_part = %f\n", frac_part);
-
+        printf("0b");   //C format for binary
+        
         if(num < 0)
         {
             printf("1");
