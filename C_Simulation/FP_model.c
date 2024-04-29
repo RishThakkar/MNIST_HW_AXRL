@@ -31,7 +31,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 
                     mac_res += weights[weights_address + i + 36];
                     
-                    mac_res = (mac_res >> 5);  // Shift right by 5 
+                    mac_res = (mac_res >> 4);  // Shift right by 4
 
 
                     out[out_index] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
@@ -154,9 +154,9 @@ int main()
 {    
     HW_FP(binary_weights_bias, 0, 40, binary_image, 0, 1764, 0, conv1out_FP);
     HW_FP(binary_weights_bias, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
-    HW_FP(binary_weights_bias, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
-    HW_FP(binary_weights_bias, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
-    HW_FP(binary_weights_bias, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+    // HW_FP(binary_weights_bias, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+    // HW_FP(binary_weights_bias, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+    // HW_FP(binary_weights_bias, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
     // for(int i =0; i<6400;i++)
     // {
     //     print_binary_8(conv1out_FP[i]);

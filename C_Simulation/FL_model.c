@@ -127,15 +127,13 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
         {
             float mac_res = 0.0;
 
-            for (int j = 0; j < 4; j++)
-            {
-                for (int k = 0; k < 9 * 9; k++)
+            // for (int j = 0; j < 4; j++)
+            // {
+                for (int k = 0; k < 9 * 9 * 4; k++)
                 {
-                    mac_res += data[data_address + k + (j * 9 * 9)] * weights[weights_address + (j * 10) + (k * 40) + i];   
-                }
-
-                         
-            }
+                    mac_res += data[data_address + k] * weights[weights_address + (k * 10) + i];   
+                }        
+            // }
 
             mac_res += weights[weights_address + 3240 + i];
 
@@ -152,7 +150,7 @@ int main()
     HW(weights_bias, 0, 0, conv1out, 0, 0, 1 , max1out_real);
     HW(weights_bias, 40, 148, max1out_real, 0, 1600, 2, conv2out);
     HW(weights_bias, 0, 0, conv2out, 0, 0, 3 , max2out_real);
-    HW(weights_bias, 188, 0, max2out_real, 0, 0, 4, dense_out);
+    HW(weights_bias2, 188, 0, max2out_real, 0, 0, 4, dense_out);
     
     saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
     saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");

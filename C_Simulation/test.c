@@ -2,8 +2,14 @@
 #include <stdint.h>
 
 // Function to print a number in binary
-void print_binary(int16_t num) {
+void print_binary_16(int16_t num) {
     for (int i = 15; i >= 0; i--) {
+        printf("%c", (num & (1 << i)) ? '1' : '0');
+    }
+    printf("\n");
+}
+void print_binary_32(int32_t num) {
+    for (int i = 31; i >= 0; i--) {
         printf("%c", (num & (1 << i)) ? '1' : '0');
     }
     printf("\n");
@@ -25,24 +31,21 @@ void print_array_binary_8(int8_t arr[], int size) {
 int main()
 {   
     // Correctly defining binary values
-    int8_t a[2] = {0b00100000, 0b00000000}; // 
-    int8_t b[2] = {0b00111011, 0b00110000}; //
+    int8_t a = 0b00111000;  // 3.5 
+    int8_t b = 0b11110000;  // 
+    // int8_t c = 0b01111111;  // 
     
-    int16_t mul ; // Multiplication result stored in a 16-bit integer
+    int32_t mul ; // Multiplication result stored in a 16-bit integer
     int8_t mul2;
     
-    for(int i=0; i<2 ;i++)
-    {
-        int16_t mul = 0b0000000000000000; 
-        mul += a[i]*b[i];
-        mul  = mul >>5;
-    }
-    mul2 = mul;
-    // printf("Decimal: %d\n", mul);
-    // printf("Binary: ");
-    print_array_binary_8(a, 2);
-    print_binary(mul);
-    mul2 = (mul>>5);
+    mul = a*b;
+    
+    print_binary_16(mul);
+    // print_binary_32(a);
+    // print_binary_32(b);
+    // mul = mul ^ 0b11111111111111111111111111111111;
+    // print_binary_32(mul);
+    mul2 = (mul>>4);
     print_binary_8(mul2);
     return 0;
 }
