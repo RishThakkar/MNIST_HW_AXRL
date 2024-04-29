@@ -146,10 +146,10 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 int main()
 {
     // HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
-    HW(weights_bias, 0, 40, image, 0, 1764, 0 , conv1out);
-    HW(weights_bias, 0, 0, conv1out, 0, 0, 1 , max1out_real);
-    HW(weights_bias, 40, 148, max1out_real, 0, 1600, 2, conv2out);
-    HW(weights_bias, 0, 0, conv2out, 0, 0, 3 , max2out_real);
+    HW(weights_bias2, 0, 40, image, 0, 1764, 0 , conv1out);
+    HW(weights_bias2, 0, 0, conv1out, 0, 0, 1 , max1out_real);
+    HW(weights_bias2, 40, 148, max1out_real, 0, 1600, 2, conv2out);
+    HW(weights_bias2, 0, 0, conv2out, 0, 0, 3 , max2out_real);
     HW(weights_bias2, 188, 0, max2out_real, 0, 0, 4, dense_out);
     
     saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");

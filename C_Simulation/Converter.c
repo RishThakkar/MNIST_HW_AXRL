@@ -117,14 +117,14 @@ void converter(float num)
 
 void weightarray(float arr[], int len) 
 {
-   FILE *file = fopen("binary_weights.txt", "w");
+   FILE *file = fopen("binary_weights_new.txt", "w");
     if (file == NULL) 
     {
         printf("Error opening file!\n");
         return;
     }
 
-    freopen("binary_weights.txt", "w", stdout);
+    freopen("binary_weights_new.txt", "w", stdout);
 
     for (int i = 0; i < len; i++) 
     {
@@ -372,11 +372,14 @@ int main()
     converter(2.022736);
     printf("\n");
     
-    int len = sizeof(weights_bias) / sizeof(weights_bias[0]);
-    weightarray(weights_bias, len);
+    // int len = sizeof(weights_bias) / sizeof(weights_bias[0]);
+    // weightarray(weights_bias, len);
 
     int imglen = sizeof(image) / sizeof(image[0]);
     imagearray(image, imglen);
+
+    int len = sizeof(weights_bias2) / sizeof(weights_bias2[0]);
+    weightarray(weights_bias2, len);
 
     return 0;
 }
