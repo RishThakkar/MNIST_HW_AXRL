@@ -30,6 +30,7 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
                     mac_res += weights[weights_address + i + 36];
+                    printf("%f \n", mac_res);
 
                     out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;

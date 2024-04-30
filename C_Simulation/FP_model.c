@@ -29,12 +29,13 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                     mac_res += data[data_address + j + 85] * weights[weights_address + i + 28];
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
-                    mac_res += weights[weights_address + i + 36];
-                    
                     mac_res = (mac_res >> 4);  // Shift right by 4
 
+                    mac_res += weights[weights_address + i + 36];
+                    // printf("%d\n", mac_res);
 
                     out[out_index] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
+                    // printf("%d\n", out[out_index]);
                     out_index++;
                 }
 
@@ -90,12 +91,13 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                         mac_res += data[data_address + j + 40 + k * 20 * 20] * weights[weights_address + i + (k * 4) +  96];       
                         mac_res += data[data_address + j + 41 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 112];
                         mac_res += data[data_address + j + 42 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 128];
+                        
+                        mac_res = (mac_res >> 4);  // Shift right by 4
 
                         mac_res += weights[weights_address + i + 144];
 
                     }
 
-                    mac_res = (mac_res >> 5);  // Shift right by 5
 
                     out[out_index] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
                     out_index++;
@@ -140,9 +142,10 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                 }        
             }
 
+            mac_res = (mac_res >> 4);  // Shift right by 4
+
             mac_res += weights[weights_address + 3240 + i];
 
-            mac_res = (mac_res >> 5);  // Shift right by 5
 
             out[i] = (mac_res > 0b0000000000000000) ? mac_res : 0b0000000000000000;
     
@@ -154,9 +157,9 @@ int main()
 {    
     HW_FP(binary_weights_bias, 0, 40, binary_image, 0, 1764, 0, conv1out_FP);
     HW_FP(binary_weights_bias, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
-    // HW_FP(binary_weights_bias, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
-    // HW_FP(binary_weights_bias, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
-    // HW_FP(binary_weights_bias, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+    HW_FP(binary_weights_bias, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+    HW_FP(binary_weights_bias, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+    HW_FP(binary_weights_bias, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
     // for(int i =0; i<6400;i++)
     // {
     //     print_binary_8(conv1out_FP[i]);

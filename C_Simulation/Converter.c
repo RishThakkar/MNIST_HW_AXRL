@@ -3,6 +3,8 @@
 #include <math.h>
 #include "functions.h"
 
+// -8  4  2  1 .  0.5  0.25  0.125  0.0625
+
 void converter(float num)
 {
     // if(num >= -4)
