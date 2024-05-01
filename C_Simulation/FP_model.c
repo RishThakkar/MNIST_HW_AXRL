@@ -162,22 +162,12 @@ int main()
     HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
     HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
     HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
-    // for(int i =0; i<6400;i++)
-    // {
-    //     print_binary_8(conv1out_FP[i]);
-    //     printf("\n");
-    // }
-    // printArray_Binary(conv1out_FP, conv1_out_size);
+
     saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
     saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
     saveBinaryFeatureMaps(conv2out_FP, 18, 18, 4, "Binary_C_conv2_out.txt");    
     saveBinaryFeatureMaps(max2out_real_FP, 9, 9, 4, "Binary_C_max2_out.txt"); 
     saveBinaryFeatureMaps(dense_out_FP, 10, 1, 1, "Binary_C_dense_out.txt"); 
-    // saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
-    // saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
-    // saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
-    // saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
-    // saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
 
     return 0;
 }
