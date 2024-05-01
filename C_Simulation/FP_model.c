@@ -157,7 +157,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 
 int main()
 {    
-    HW_FP(binary_weights_bias2, 0, 40, binary_image_4, 0, 1764, 0, conv1out_FP);
+    HW_FP(binary_weights_bias2, 0, 40, binary_image_9, 0, 1764, 0, conv1out_FP);
     HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
     HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
     HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
