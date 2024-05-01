@@ -15,20 +15,40 @@ void printArray(float *arr, int size)
     printf(" ]\n");
 }
 
-void print_binary_8(int8_t num) {
-    for (int i = 7; i >= 0; i--) {
+// Function to print a number in binary
+void print_binary_16(int16_t num) 
+{
+    for (int i = 15; i >= 0; i--) 
+    {
+        printf("%c", (num & (1 << i)) ? '1' : '0');
+    }
+    printf("\n");
+}
+void print_binary_32(int32_t num) 
+{
+    for (int i = 31; i >= 0; i--) 
+    {
+        printf("%c", (num & (1 << i)) ? '1' : '0');
+    }
+    printf("\n");
+}
+void print_binary_8(int8_t num) 
+{
+    for (int i = 7; i >= 0; i--) 
+    {
         printf("%c", (num & (1 << i)) ? '1' : '0');
     }
     printf("\n");
 }
 
-void printArray_Binary(int8_t arr[], int size) 
+void print_array_binary_8(int8_t arr[], int size) 
 {
     for (int i = 0; i < size; i++) 
     {
         print_binary_8(arr[i]);
     }
 }
+
 
 void printFeatureMaps(float *arr, int height, int width, int channels) 
 {
@@ -106,6 +126,18 @@ void saveBinaryFeatureMaps(int8_t *arr, int height, int width, int channels, con
     }
 
     fclose(file);
+}
+
+int8_t clip_value(int16_t value) 
+{
+    if (value > 0x7F) 
+    {
+        return 0b01111111;  
+    } else if (value < -0x80) 
+    {
+        return 0b10000000;  
+    }
+    return (int8_t)value;
 }
 
 

@@ -2,7 +2,7 @@
 #include "functions.c"
 
 
-void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data, int data_address, int data_size,  int layer_index, int8_t *out)
+void HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
 {
     if (layer_index == 0)    // Convolution & ReLU
     {
@@ -17,7 +17,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 
                 if ((((j % (42*count + 40) != 0) && (j % (42*count + 41) != 0)) || (j == 0)) && (count < 40)) 
                 { 
-                    int16_t mac_res = 0b0000000000000000;
+                    float mac_res = 0.0;
 
                     mac_res += data[data_address + j     ] * weights[weights_address + i     ];            
                     mac_res += data[data_address + j +  1] * weights[weights_address + i +  4];        
@@ -29,14 +29,11 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                     mac_res += data[data_address + j + 85] * weights[weights_address + i + 28];
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
-                    mac_res = (mac_res >> 4);  // Shift right by 4
+                    mac_res += weights[weights_address + i + 36];
+                    // printf("%f \n", mac_res);
+                    mac_res = mac_res/8;
 
-                    mac_res += weights[weights_address + i + 36];   //Bias
-
-                    mac_res = mac_res>>3;   //Divide by 8
-                    // mac_res = clip_value(mac_res);  //Gives 8 bit out
-
-                    out[out_index] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
+                    out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
                 }
 
@@ -52,7 +49,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
         {
             for (int j = 0; j < 40 * 20; j += 2)
             {
-                int8_t max;
+                float max;
 
                 max =  data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2     ];
                 max = (data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 +  1] > max) ? data[data_address + i * 40 * 40 + (j % 40) + (j - (j % 40)) * 2 +  1] : max;
@@ -78,7 +75,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 
                 if ((((j % (20*count + 18) != 0) && (j % (20*count + 19) != 0)) || (j == 0)) && (count < 18))
                 {  
-                    int16_t mac_res = 0b0000000000000000;
+                    float mac_res = 0.0;
 
                     for (int k = 0; k < 4; k++) 
                     {
@@ -92,15 +89,13 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                         mac_res += data[data_address + j + 40 + k * 20 * 20] * weights[weights_address + i + (k * 4) +  96];       
                         mac_res += data[data_address + j + 41 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 112];
                         mac_res += data[data_address + j + 42 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 128];
-                        
-                        mac_res = (mac_res >> 4);  // Shift right by 4
 
                         mac_res += weights[weights_address + i + 144];
 
                     }
-                    mac_res = mac_res>>3;  //Divide by 8
+                    mac_res = mac_res/8;
 
-                    out[out_index] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
+                    out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
                 }
             }
@@ -115,7 +110,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
         {
             for (int j = 0; j < 18 * 9; j += 2)
             {
-                int8_t max;
+                float max;
 
                 max =  data[data_address + i * 18 * 18 + (j % 18) + (j - (j % 18)) * 2     ];
                 max = (data[data_address + i * 18 * 18 + (j % 18) + (j - (j % 18)) * 2 +  1] > max) ? data[data_address + i * 18 * 18 + (j % 18) + (j - (j % 18)) * 2 +  1] : max;
@@ -133,7 +128,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 
         for (int i = 0; i < 10; i++)
         {
-            int16_t mac_res = 0b0000000000000000;
+            float mac_res = 0.0;
 
             // for (int j = 0; j < 4; j++)
             // {
@@ -143,41 +138,29 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                 }        
             // }
 
-            mac_res = (mac_res >> 4);  // Shift right by 4
-
             mac_res += weights[weights_address + 3240 + i];
+            mac_res = mac_res/8;
 
-            mac_res = mac_res >> 3;
-
-            out[i] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
+            out[i] = (mac_res > 0) ? mac_res : 0;
     
         }
     }
 }
 
 int main()
-{    
-    HW_FP(binary_weights_bias2, 0, 40, binary_image_4, 0, 1764, 0, conv1out_FP);
-    HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
-    HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
-    HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
-    HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
-    // for(int i =0; i<6400;i++)
-    // {
-    //     print_binary_8(conv1out_FP[i]);
-    //     printf("\n");
-    // }
-    // printArray_Binary(conv1out_FP, conv1_out_size);
-    saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
-    saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
-    saveBinaryFeatureMaps(conv2out_FP, 18, 18, 4, "Binary_C_conv2_out.txt");    
-    saveBinaryFeatureMaps(max2out_real_FP, 9, 9, 4, "Binary_C_max2_out.txt"); 
-    saveBinaryFeatureMaps(dense_out_FP, 10, 1, 1, "Binary_C_dense_out.txt"); 
-    // saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
-    // saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
-    // saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
-    // saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
-    // saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
+{
+    // HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
+    HW(weights_bias2, 0, 40, image_4, 0, 1764, 0 , conv1out);
+    HW(weights_bias2, 0, 0, conv1out, 0, 0, 1 , max1out_real);
+    HW(weights_bias2, 40, 148, max1out_real, 0, 1600, 2, conv2out);
+    HW(weights_bias2, 0, 0, conv2out, 0, 0, 3 , max2out_real);
+    HW(weights_bias2, 188, 0, max2out_real, 0, 0, 4, dense_out);
+    
+    saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
+    saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
+    saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
+    saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
+    saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
 
     return 0;
 }
