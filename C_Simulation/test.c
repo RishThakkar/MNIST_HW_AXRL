@@ -6,8 +6,8 @@ int main()
 {   
     // Correctly defining binary values
     int8_t a = 0b00111000;  // 3.5 
-    int8_t b = 0b11100000;  // -2
-    int8_t c = 0b00010000;  // 1
+    int8_t b = 0b01000000;  // -4
+    int8_t c = 0b00000000;  // 1
     
     int16_t mul; 
     int8_t mul2;

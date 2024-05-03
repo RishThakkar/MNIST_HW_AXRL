@@ -30,6 +30,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
                     mac_res = (mac_res >> 4);  // Shift right by 4
+                    // mac_res = mac_res>>3;  //Divide by 8
 
                     mac_res += weights[weights_address + i + 36];   //Bias
 
@@ -37,8 +38,73 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                     // mac_res = clip_value(mac_res);  //Gives 8 bit out
 
                     out[out_index] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
+
+                    // if (out_index == 1895) 
+                    // {
+                    //     FILE *file = fopen("test.txt", "w");
+
+                    //     print_binary_8_to_file(file,data[data_address + j     ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i     ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j     +1]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i   +4  ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j     +2]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i   +8  ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j  +42   ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i   +12  ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j   +43  ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i +16    ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j   +44  ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i +20    ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j    +84 ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i +24    ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j   +85  ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i +28     ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,data[data_address + j  +86   ]);
+                    //     fprintf(file, "\n");
+                    //     print_binary_8_to_file(file,weights[weights_address + i  +32    ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file,weights[weights_address + i  +36    ]);
+                    //     fprintf(file, "\n");
+                    //     fprintf(file, "\n");
+
+                    //     print_binary_8_to_file(file, out[out_index]);
+                    // }
                     out_index++;
-                }
+                } 
 
             } 
         }
@@ -94,10 +160,10 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                         mac_res += data[data_address + j + 42 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 128];
                         
                         mac_res = (mac_res >> 4);  // Shift right by 4
-
-                        mac_res += weights[weights_address + i + 144];
+                        // mac_res = mac_res>>3;  //Divide by 8
 
                     }
+                    mac_res += weights[weights_address + i + 144];
                     mac_res = mac_res>>3;  //Divide by 8
 
                     out[out_index] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
@@ -144,6 +210,7 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
             // }
 
             mac_res = (mac_res >> 4);  // Shift right by 4
+            // mac_res = mac_res>>3;  //Divide by 8
 
             mac_res += weights[weights_address + 3240 + i];
 
@@ -157,17 +224,82 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 
 int main()
 {    
-    HW_FP(binary_weights_bias2, 0, 40, binary_image_9, 0, 1764, 0, conv1out_FP);
-    HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
-    HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
-    HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
-    HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
 
-    saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
-    saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
-    saveBinaryFeatureMaps(conv2out_FP, 18, 18, 4, "Binary_C_conv2_out.txt");    
-    saveBinaryFeatureMaps(max2out_real_FP, 9, 9, 4, "Binary_C_max2_out.txt"); 
-    saveBinaryFeatureMaps(dense_out_FP, 10, 1, 1, "Binary_C_dense_out.txt"); 
+        // HW_FP(binary_weights_bias2, 0, 40, image_1, 0, 1764, 0, conv1out_FP);
+        // HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
+        // HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+        // HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+        // HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+
+        // saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
+        // saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
+        // saveBinaryFeatureMaps(conv2out_FP, 18, 18, 4, "Binary_C_conv2_out.txt");    
+        // saveBinaryFeatureMaps(max2out_real_FP, 9, 9, 4, "Binary_C_max2_out.txt"); 
+        // saveBinaryFeatureMaps(dense_out_FP, 10, 1, 1, "Binary_C_dense_out.txt"); 
+
+    int correct_count = 0;
+    int label;
+    int predicted_label;
+    char buffer[100000];
+    int max_value, value;
+    FILE *label_file, *output_file;
+    
+    label_file = fopen("mnist_labels.txt", "r");
+    if (label_file == NULL) {
+        perror("Failed to open label file");
+        return 1;
+    }
+
+
+    for (int i = 0; i < 10000; i++)
+    {
+        HW_FP(binary_weights_bias2, 0, 40, images[i], 0, 1764, 0, conv1out_FP);
+        HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
+        HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+        HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+        HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+
+        saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
+        saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
+        saveBinaryFeatureMaps(conv2out_FP, 18, 18, 4, "Binary_C_conv2_out.txt");    
+        saveBinaryFeatureMaps(max2out_real_FP, 9, 9, 4, "Binary_C_max2_out.txt"); 
+        saveBinaryFeatureMaps(dense_out_FP, 10, 1, 1, "Binary_C_dense_out.txt"); 
+
+        output_file = fopen("Binary_C_dense_out.txt", "r");
+        if (output_file == NULL) {
+            perror("Failed to open output file");
+            continue;
+        }
+
+        max_value = -1;
+        predicted_label = -1;
+        for (int j = -1; fgets(buffer, sizeof(buffer), output_file) != NULL; j++) {
+            sscanf(buffer, "%d", &value); // Assuming the value can be read directly
+            if (value > max_value) {
+                max_value = value;
+                predicted_label = j;
+            }
+        }
+        fclose(output_file);
+
+        // Read the correct label from mnist_labels.txt
+        if (fscanf(label_file, "%d", &label) != 1) {
+            perror("Failed to read label");
+            break;
+        }
+
+        // Compare and update correct count
+        if (label == predicted_label) {
+            correct_count++;
+        }
+
+        // printf("%d \n", label);
+        // printf("%d \n\n", predicted_label);
+    }
+
+    fclose(label_file);
+
+    printf("Accuracy: %f%%\n", (double)correct_count/10000.0);
 
     return 0;
 }

@@ -30,12 +30,57 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
                     mac_res += weights[weights_address + i + 36];
-                    printf("%f \n", mac_res);
+                    // printf("%f \n", mac_res);
 
                     out[out_index] = (mac_res > 0) ? mac_res : 0;
+                    if(out_index==1895)
+                    {
+                        printf("%f \n", out[out_index]);
+                        printf("\n");
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j]);
+                        printf("%f \n", weights[weights_address + i]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j +1]);
+                        printf("%f \n", weights[weights_address + i+4]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+2]);
+                        printf("%f \n", weights[weights_address + i+8]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+42]);
+                        printf("%f \n", weights[weights_address + i+12]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+43]);
+                        printf("%f \n", weights[weights_address + i+16]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+44]);
+                        printf("%f \n", weights[weights_address + i+20]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+84]);
+                        printf("%f \n", weights[weights_address + i+24]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+85]);
+                        printf("%f \n", weights[weights_address + i+28]);
+                        printf("\n");
+
+                        printf("%f \n", data[data_address + j+86]);
+                        printf("%f \n", weights[weights_address + i+32]);
+                        printf("\n");
+                        printf("\n");
+
+                        printf("%f \n",weights[weights_address + i + 36]);
+                    }
+                        
                     out_index++;
                 }
-
             } 
         }
     }
@@ -147,17 +192,17 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 int main()
 {
     // HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
-    HW(weights_bias2, 0, 40, image_9, 0, 1764, 0 , conv1out);
-    HW(weights_bias2, 0, 0, conv1out, 0, 0, 1 , max1out_real);
-    HW(weights_bias2, 40, 148, max1out_real, 0, 1600, 2, conv2out);
-    HW(weights_bias2, 0, 0, conv2out, 0, 0, 3 , max2out_real);
-    HW(weights_bias2, 188, 0, max2out_real, 0, 0, 4, dense_out);
+    HW(weights_bias2, 0, 40, image, 0, 1764, 0 , conv1out);
+    // HW(weights_bias2, 0, 0, conv1out, 0, 0, 1 , max1out_real);
+    // HW(weights_bias2, 40, 148, max1out_real, 0, 1600, 2, conv2out);
+    // HW(weights_bias2, 0, 0, conv2out, 0, 0, 3 , max2out_real);
+    // HW(weights_bias2, 188, 0, max2out_real, 0, 0, 4, dense_out);
     
     saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
-    saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
-    saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
-    saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
-    saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
+    // saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
+    // saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
+    // saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
+    // saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
 
     return 0;
 }
