@@ -1,0 +1,593 @@
+# //  Questa Sim
+# //  Version 10.7b_1 linux Jul 26 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# do runsim.do
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Copying /tools/mentor/questa_10.7b_1/questasim/linux/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:57:59 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 13:58:00 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:58:00 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Compiling package cu_sv_unit
+# -- Compiling module cu
+# 
+# Top level modules:
+# 	cu
+# End time: 13:58:00 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:58:00 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Compiling module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 13:58:01 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:58:01 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Compiling module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 13:58:01 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:58:01 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 13:58:01 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 13:58:01 on May 03,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(145)
+#    Time: 1488175 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 145
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:04:51 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 14:04:51 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:04:51 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping package cu_sv_unit
+# -- Compiling module cu
+# 
+# Top level modules:
+# 	cu
+# End time: 14:04:51 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:04:51 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Skipping module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 14:04:52 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:04:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 14:04:52 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:04:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Skipping module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 14:04:52 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 14:04:53 on May 03,2024, Elapsed time: 0:06:52
+# Errors: 0, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 14:04:53 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(145)
+#    Time: 1488175 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 145
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:09:20 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 14:09:21 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:09:21 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping module cu
+# -- Skipping package cu_sv_unit
+# 
+# Top level modules:
+# 	cu
+# End time: 14:09:21 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:09:21 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Skipping module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 14:09:21 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:09:21 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 14:09:21 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:09:21 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 14:09:22 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# End time: 14:09:39 on May 03,2024, Elapsed time: 0:04:46
+# Errors: 0, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 14:09:39 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(145)
+#    Time: 1276655 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 145
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:13:25 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 14:13:25 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:13:25 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping package cu_sv_unit
+# -- Compiling module cu
+# 
+# Top level modules:
+# 	cu
+# End time: 14:13:25 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:13:26 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Skipping module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 14:13:26 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:13:26 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 14:13:26 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 14:13:26 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Skipping module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 14:13:27 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# End time: 14:13:28 on May 03,2024, Elapsed time: 0:03:49
+# Errors: 0, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 14:13:28 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(145)
+#    Time: 1276655 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 145
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:06:53 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 15:06:53 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:06:53 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping module cu
+# -- Skipping package cu_sv_unit
+# 
+# Top level modules:
+# 	cu
+# End time: 15:06:54 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:06:54 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Compiling module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 15:06:54 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:06:54 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 15:06:54 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:06:54 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Skipping module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 15:06:54 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 15:06:55 on May 03,2024, Elapsed time: 0:53:27
+# Errors: 0, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 15:06:55 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(145)
+#    Time: 1276655 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 145
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:16 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 15:19:16 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:16 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping module cu
+# -- Skipping package cu_sv_unit
+# 
+# Top level modules:
+# 	cu
+# End time: 15:19:16 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:16 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# ** Error: (vlog-13069) ../src/kernel.sv(43): near ":": syntax error, unexpected ':', expecting ';' or ','.
+# End time: 15:19:16 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: /tools/mentor/questa_10.7b_1/questasim/linux/vlog failed.
+# Error in macro ./runsim.do line 12
+# /tools/mentor/questa_10.7b_1/questasim/linux/vlog failed.
+#     while executing
+# "vlog +acc -incr ../src/kernel.sv "
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 15:19:52 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping module cu
+# -- Skipping package cu_sv_unit
+# 
+# Top level modules:
+# 	cu
+# End time: 15:19:52 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Compiling module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 15:19:52 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 15:19:52 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:19:52 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Skipping module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 15:19:53 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# End time: 15:19:54 on May 03,2024, Elapsed time: 0:12:59
+# Errors: 4, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 15:19:54 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(145)
+#    Time: 1276655 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 145
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:25:34 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 15:25:34 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:25:35 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping module cu
+# -- Skipping package cu_sv_unit
+# 
+# Top level modules:
+# 	cu
+# End time: 15:25:35 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:25:35 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Skipping module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 15:25:35 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:25:35 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 15:25:36 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:25:36 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 15:25:36 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 15:25:40 on May 03,2024, Elapsed time: 0:05:46
+# Errors: 0, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 15:25:40 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(180)
+#    Time: 1292915 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 180
+do runsim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:30:25 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/top.sv 
+# -- Skipping module top
+# 
+# Top level modules:
+# 	top
+# End time: 15:30:25 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:30:25 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Skipping module cu
+# -- Skipping package cu_sv_unit
+# 
+# Top level modules:
+# 	cu
+# End time: 15:30:26 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:30:26 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/kernel.sv 
+# -- Skipping module kernel
+# 
+# Top level modules:
+# 	kernel
+# End time: 15:30:26 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:30:26 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/memory.sv 
+# -- Skipping module memory
+# 
+# Top level modules:
+# 	memory
+# End time: 15:30:26 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 15:30:26 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_top.v 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 15:30:26 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 15:30:29 on May 03,2024, Elapsed time: 0:04:49
+# Errors: 0, Warnings: 1
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 15:30:29 on May 03,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.top(fast)
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# Loading work.kernel(fast)
+# Loading work.memory(fast)
+# ** Note: $finish    : tb_top.v(214)
+#    Time: 1325575 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_top.v line 214
+# End time: 16:39:22 on May 03,2024, Elapsed time: 1:08:53
+# Errors: 0, Warnings: 1

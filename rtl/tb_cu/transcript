@@ -1,0 +1,52 @@
+# //  Questa Sim
+# //  Version 10.7b_1 linux Jul 26 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# do runsim.do
+# QuestaSim vmap 10.7b_1 Lib Mapping Utility 2018.07 Jul 26 2018
+# vmap work work 
+# Copying /tools/mentor/questa_10.7b_1/questasim/linux/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:42:07 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr ../src/cu.sv 
+# -- Compiling package cu_sv_unit
+# -- Compiling module cu
+# 
+# Top level modules:
+# 	cu
+# End time: 13:42:07 on May 03,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:42:07 on May 03,2024
+# vlog -reportprogress 300 "+acc" -incr tb_cu.v 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 13:42:08 on May 03,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# ** Warning: (vsim-8689) Ignoring plusarg '+acc'.  Did you mean '-voptargs=+acc'?
+# vsim "+acc" -t ps -lib work testbench 
+# Start time: 13:42:08 on May 03,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading work.testbench(fast)
+# Loading sv_std.std
+# Loading work.cu_sv_unit(fast)
+# Loading work.cu(fast)
+# ** Note: $finish    : tb_cu.v(86)
+#    Time: 2000045 ns  Iteration: 1  Instance: /testbench
+# 1
+# Break in Module testbench at tb_cu.v line 86
+# End time: 13:57:29 on May 03,2024, Elapsed time: 0:15:21
+# Errors: 0, Warnings: 1

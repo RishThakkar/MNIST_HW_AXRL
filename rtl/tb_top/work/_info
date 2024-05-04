@@ -1,0 +1,164 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/user/stud/fall23/vp2518/EmbeddedSystems/Project/tb_top
+T_opt
+!s110 1714764630
+VO1]l2ln^BD=2;860gBzl82
+04 9 4 work testbench fast 0
+=1-b04f130f6ddc-66353b56-a4a0-4290
+o-quiet -auto_acc_if_foreign -work work
+Z1 tCvgOpt 0
+n@_opt
+OE;O;10.7b_1;67
+vcu
+Z2 !s10a 1714760000
+Z3 DXx6 sv_std 3 std 0 22 >9az<^>2ff9DAl3OFGaAf1
+DXx4 work 10 cu_sv_unit 0 22 <Q[[HoI6PAoc3gemijEcS0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+!i10b 1
+!s100 lNUhMz0^9n^O2G:eN^0M10
+I3P_;Pao>h;oK7ATeAL?C[3
+!s105 cu_sv_unit
+S1
+R0
+w1714760000
+Z5 8../src/cu.sv
+Z6 F../src/cu.sv
+L0 37
+Z7 OE;L;10.7b_1;67
+31
+!s108 1714760005.000000
+Z8 !s107 ../src/cu.sv|
+Z9 !s90 -reportprogress|300|+acc|-incr|../src/cu.sv|
+!i113 0
+Z10 o+acc -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+Xcu_sv_unit
+R2
+R3
+V<Q[[HoI6PAoc3gemijEcS0
+r1
+!s85 0
+!i10b 1
+!s100 n7>Xoz]mM1O62falmDC822
+I<Q[[HoI6PAoc3gemijEcS0
+!i103 1
+S1
+R0
+w1714758794
+R5
+R6
+L0 1
+R7
+31
+!s108 1714759080.000000
+R8
+R9
+!i113 0
+R10
+R1
+vkernel
+!s10a 1714763989
+R3
+!s110 1714763992
+!i10b 1
+!s100 KnP>kimzL0^_jX]a9KnJS1
+IJY?ZMk_UE3YoEG5:<<0j:1
+R4
+!s105 kernel_sv_unit
+S1
+R0
+w1714763989
+8../src/kernel.sv
+F../src/kernel.sv
+L0 1
+R7
+r1
+!s85 0
+31
+!s108 1714763992.000000
+!s107 ../src/kernel.sv|
+!s90 -reportprogress|300|+acc|-incr|../src/kernel.sv|
+!i113 0
+R10
+R1
+vmemory
+!s10a 1714685105
+R3
+!s110 1714759081
+!i10b 1
+!s100 SGJnN;O8Wi^CkE@SZ1mnV3
+IDcD54?i4CTh<IHQWZ=RAa0
+R4
+!s105 memory_sv_unit
+S1
+R0
+w1714685105
+8../src/memory.sv
+F../src/memory.sv
+L0 1
+R7
+r1
+!s85 0
+31
+!s108 1714759081.000000
+!s107 ../src/memory.sv|
+!s90 -reportprogress|300|+acc|-incr|../src/memory.sv|
+!i113 0
+R10
+R1
+vtestbench
+!s110 1714764626
+!i10b 1
+!s100 LjTW9bd:e=XQgd3?:FOCQ2
+IWRiH;O?@I;X84jAlP=XaQ0
+R4
+R0
+w1714764621
+8tb_top.v
+Ftb_top.v
+L0 9
+R7
+r1
+!s85 0
+31
+!s108 1714764626.000000
+!s107 tb_top.v|
+!s90 -reportprogress|300|+acc|-incr|tb_top.v|
+!i113 0
+R10
+R1
+vtop
+!s10a 1714350713
+R3
+!s110 1714759080
+!i10b 1
+!s100 T4H8HOi>046ilGdXgQ>_[0
+I<>LlWidEOQnjCX8T261[Y3
+R4
+!s105 top_sv_unit
+S1
+R0
+w1714350713
+8../src/top.sv
+F../src/top.sv
+L0 1
+R7
+r1
+!s85 0
+31
+!s108 1714759079.000000
+!s107 ../src/top.sv|
+!s90 -reportprogress|300|+acc|-incr|../src/top.sv|
+!i113 0
+R10
+R1
