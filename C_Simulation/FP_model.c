@@ -249,7 +249,7 @@ int main()
     }
 
 
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < 1; i++)
     {
         HW_FP(binary_weights_bias_FP_scaled, 0, 40, images[i], 0, 1764, 0, conv1out_FP);
         HW_FP(binary_weights_bias_FP_scaled, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
@@ -297,7 +297,7 @@ int main()
 
     fclose(label_file);
 
-    printf("Accuracy: %f%%\n", (double)correct_count/10000.0);
+    printf("Accuracy: %f%%\n", (double)correct_count/1.0);
 
     return 0;
 }
