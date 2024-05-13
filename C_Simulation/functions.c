@@ -102,6 +102,12 @@ void print_binary_8_to_file(FILE *file, int8_t num) {
     }
 }
 
+void print_binary_16_to_file(FILE *file, int16_t num) {
+    for (int i = 15; i >= 0; i--) {
+        fprintf(file, "%c", (num & (1 << i)) ? '1' : '0');
+    }
+}
+
 // Function to save binary data in a 2D grid format per channel
 void saveBinaryFeatureMaps(int8_t *arr, int height, int width, int channels, const char *filename) {
     FILE *file = fopen(filename, "w");
@@ -128,12 +134,37 @@ void saveBinaryFeatureMaps(int8_t *arr, int height, int width, int channels, con
     fclose(file);
 }
 
+void saveBinary_16FeatureMaps(int16_t *arr, int height, int width, int channels, const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    for (int c = 0; c < channels; ++c) {
+        fprintf(file, "Channel %d:\n", c + 1);
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                int index = c * height * width + i * width + j;
+                print_binary_16_to_file(file, arr[index]);
+                if (j != width - 1) {
+                    fprintf(file, " "); // Space between binary numbers in the same row
+                }
+            }
+            fprintf(file, "\n"); // New line at the end of each row
+        }
+        fprintf(file, "\n"); // Extra new line to separate channels
+    }
+
+    fclose(file);
+}
+
 int8_t clip_value(int16_t value) 
 {
-    if (value > 0x7F) 
+    if (value > 0x007F) 
     {
         return 0b01111111;  
-    } else if (value < -0x80) 
+    } else if (value < -0x0080) 
     {
         return 0b10000000;  
     }

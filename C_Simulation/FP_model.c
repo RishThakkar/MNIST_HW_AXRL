@@ -29,17 +29,15 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                     mac_res += data[data_address + j + 85] * weights[weights_address + i + 28];
                     mac_res += data[data_address + j + 86] * weights[weights_address + i + 32];
 
-                    mac_res = (mac_res >> 4);  // Shift right by 4
-                    // mac_res = mac_res>>3;  //Divide by 8
+                    // mac_res = (mac_res >> 4);  // Shift right by 4
+                    mac_res += weights[weights_address + i + 36] << 4;   //Bias
 
-                    mac_res += weights[weights_address + i + 36];   //Bias
+                    mac_res = mac_res>>7;  
 
-                    mac_res = mac_res>>3;   //Divide by 8
-                    // mac_res = clip_value(mac_res);  //Gives 8 bit out
 
                     out[out_index] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
 
-                    // if (out_index == 1895) 
+                    // if (out_index == 408) 
                     // {
                     //     FILE *file = fopen("test.txt", "w");
 
@@ -159,12 +157,13 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                         mac_res += data[data_address + j + 41 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 112];
                         mac_res += data[data_address + j + 42 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 128];
                         
-                        mac_res = (mac_res >> 4);  // Shift right by 4
+                        // mac_res = (mac_res >> 4);  // Shift right by 4
                         // mac_res = mac_res>>3;  //Divide by 8
 
                     }
-                    mac_res += weights[weights_address + i + 144];
-                    mac_res = mac_res>>3;  //Divide by 8
+                    mac_res += weights[weights_address + i + 144] << 4;
+                    mac_res = mac_res>>7;  //Divide by 8
+                    // mac_res = clip_value(mac_res);  //Gives 8 bit out
 
                     out[out_index] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
                     out_index++;
@@ -209,12 +208,11 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
                 }        
             // }
 
-            mac_res = (mac_res >> 4);  // Shift right by 4
-            // mac_res = mac_res>>3;  //Divide by 8
+            // mac_res = (mac_res >> 4);  // Shift right by 4
+            mac_res += weights[weights_address + 3240 + i] << 4;
 
-            mac_res += weights[weights_address + 3240 + i];
-
-            mac_res = mac_res >> 3;
+            mac_res = mac_res >> 7;
+            // mac_res = clip_value(mac_res);  //Gives 8 bit out
 
             out[i] = (mac_res > 0x0000) ? mac_res : 0b0000000000000000;
     
@@ -225,11 +223,11 @@ void HW_FP(int8_t *weights, int weights_address, int weights_size, int8_t *data,
 int main()
 {    
 
-        // HW_FP(binary_weights_bias2, 0, 40, image_1, 0, 1764, 0, conv1out_FP);
-        // HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
-        // HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
-        // HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
-        // HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+        // HW_FP(binary_weights_bias_FP, 0, 40, images[1], 0, 1764, 0, conv1out_FP);
+        // HW_FP(binary_weights_bias_FP, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
+        // HW_FP(binary_weights_bias_FP, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+        // HW_FP(binary_weights_bias_FP, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+        // HW_FP(binary_weights_bias_FP, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
 
         // saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
         // saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
@@ -253,11 +251,11 @@ int main()
 
     for (int i = 0; i < 10000; i++)
     {
-        HW_FP(binary_weights_bias2, 0, 40, images[i], 0, 1764, 0, conv1out_FP);
-        HW_FP(binary_weights_bias2, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
-        HW_FP(binary_weights_bias2, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
-        HW_FP(binary_weights_bias2, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
-        HW_FP(binary_weights_bias2, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
+        HW_FP(binary_weights_bias_FP_scaled, 0, 40, images[i], 0, 1764, 0, conv1out_FP);
+        HW_FP(binary_weights_bias_FP_scaled, 0, 0, conv1out_FP, 0, 0, 1, max1out_real_FP);
+        HW_FP(binary_weights_bias_FP_scaled, 40, 148, max1out_real_FP, 0, 1600, 2, conv2out_FP);
+        HW_FP(binary_weights_bias_FP_scaled, 0, 0, conv2out_FP, 0, 0, 3, max2out_real_FP);
+        HW_FP(binary_weights_bias_FP_scaled, 188, 0, max2out_real_FP, 0, 0, 4, dense_out_FP);
 
         saveBinaryFeatureMaps(conv1out_FP, 40, 40, 4, "Binary_C_conv1_out.txt");    
         saveBinaryFeatureMaps(max1out_real_FP, 20, 20, 4, "Binary_C_max1_out.txt");    
@@ -293,8 +291,8 @@ int main()
             correct_count++;
         }
 
-        // printf("%d \n", label);
-        // printf("%d \n\n", predicted_label);
+        printf("Actual Label %d \n", label);
+        printf("Predicted Label %d \n\n", predicted_label);
     }
 
     fclose(label_file);

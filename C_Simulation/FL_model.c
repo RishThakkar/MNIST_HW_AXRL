@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "functions.c"
-
+#include "fl_image.h"
 
 void HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
 {
@@ -33,51 +33,55 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                     // printf("%f \n", mac_res);
 
                     out[out_index] = (mac_res > 0) ? mac_res : 0;
-                    if(out_index==1895)
-                    {
-                        printf("%f \n", out[out_index]);
-                        printf("\n");
-                        printf("\n");
+                    // if(out_index==408)
+                    // {
+                    //     // printf("%f \n", out[out_index]);
+                    //     printf("\n");
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j]);
-                        printf("%f \n", weights[weights_address + i]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j]);
+                    //     printf("%f \n", weights[weights_address + i]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j +1]);
-                        printf("%f \n", weights[weights_address + i+4]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j +1]);
+                    //     printf("%f \n", weights[weights_address + i+4]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+2]);
-                        printf("%f \n", weights[weights_address + i+8]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+2]);
+                    //     printf("%f \n", weights[weights_address + i+8]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+42]);
-                        printf("%f \n", weights[weights_address + i+12]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+42]);
+                    //     printf("%f \n", weights[weights_address + i+12]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+43]);
-                        printf("%f \n", weights[weights_address + i+16]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+43]);
+                    //     printf("%f \n", weights[weights_address + i+16]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+44]);
-                        printf("%f \n", weights[weights_address + i+20]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+44]);
+                    //     printf("%f \n", weights[weights_address + i+20]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+84]);
-                        printf("%f \n", weights[weights_address + i+24]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+84]);
+                    //     printf("%f \n", weights[weights_address + i+24]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+85]);
-                        printf("%f \n", weights[weights_address + i+28]);
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+85]);
+                    //     printf("%f \n", weights[weights_address + i+28]);
+                    //     printf("\n");
 
-                        printf("%f \n", data[data_address + j+86]);
-                        printf("%f \n", weights[weights_address + i+32]);
-                        printf("\n");
-                        printf("\n");
+                    //     printf("%f \n", data[data_address + j+86]);
+                    //     printf("%f \n", weights[weights_address + i+32]);
+                    //     printf("\n");
+                    //     printf("\n");
 
-                        printf("%f \n",weights[weights_address + i + 36]);
-                    }
+                    //     printf("%f \n",weights[weights_address + i + 36]);
+                    //     printf("\n");
+                    //     printf("\n");
+
+                    //     printf("%f \n", out[out_index]);
+                    // }
                         
                     out_index++;
                 }
@@ -134,9 +138,11 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
                         mac_res += data[data_address + j + 41 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 112];
                         mac_res += data[data_address + j + 42 + k * 20 * 20] * weights[weights_address + i + (k * 4) + 128];
 
-                        mac_res += weights[weights_address + i + 144];
 
                     }
+
+                    mac_res += weights[weights_address + i + 144];
+
 
                     out[out_index] = (mac_res > 0) ? mac_res : 0;
                     out_index++;
@@ -192,17 +198,81 @@ void HW(float *weights, int weights_address, int weights_size, float *data, int 
 int main()
 {
     // HW(float *weights, int weights_address, int weights_size, float *data, int data_address, int data_size,  int layer_index, float *out)
-    HW(weights_bias2, 0, 40, image, 0, 1764, 0 , conv1out);
-    // HW(weights_bias2, 0, 0, conv1out, 0, 0, 1 , max1out_real);
-    // HW(weights_bias2, 40, 148, max1out_real, 0, 1600, 2, conv2out);
-    // HW(weights_bias2, 0, 0, conv2out, 0, 0, 3 , max2out_real);
-    // HW(weights_bias2, 188, 0, max2out_real, 0, 0, 4, dense_out);
+    // HW(weights_bias_FP_scaled, 0, 40, fl_images[999], 0, 1764, 0 , conv1out);
+    // HW(weights_bias_FP_rearrange, 0, 0, conv1out, 0, 0, 1 , max1out_real);
+    // HW(weights_bias_FP_rearrange, 40, 148, max1out_real, 0, 1600, 2, conv2out);
+    // HW(weights_bias_FP_rearrange, 0, 0, conv2out, 0, 0, 3 , max2out_real);
+    // HW(weights_bias_FP_rearrange, 188, 0, max2out_real, 0, 0, 4, dense_out);
     
-    saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
+    // saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
     // saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
     // saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
     // saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
     // saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
+
+    int correct_count = 0;
+    int label;
+    int predicted_label;
+    char buffer[100000];
+    int max_value, value;
+    FILE *label_file, *output_file;
+    
+    label_file = fopen("mnist_labels.txt", "r");
+    if (label_file == NULL) {
+        perror("Failed to open label file");
+        return 1;
+    }
+
+
+    for (int i = 0; i < 10000; i++)
+    {
+        HW(weights_bias_FP_scaled, 0, 40, fl_images[i], 0, 1764, 0 , conv1out);
+        HW(weights_bias_FP_scaled, 0, 0, conv1out, 0, 0, 1 , max1out_real);
+        HW(weights_bias_FP_scaled, 40, 148, max1out_real, 0, 1600, 2, conv2out);
+        HW(weights_bias_FP_scaled, 0, 0, conv2out, 0, 0, 3 , max2out_real);
+        HW(weights_bias_FP_scaled, 188, 0, max2out_real, 0, 0, 4, dense_out);
+        
+        saveFeatureMaps(conv1out, 40, 40, 4, "C_program_out_conv1.txt");
+        saveFeatureMaps(max1out_real, 20, 20, 4, "C_program_out_max1.txt");
+        saveFeatureMaps(conv2out, 18, 18, 4, "C_program_out_conv2.txt");
+        saveFeatureMaps(max2out_real, 9, 9, 4, "C_program_out_max2.txt");
+        saveFeatureMaps(dense_out, 10, 1, 1, "C_program_out_dense.txt");
+
+        output_file = fopen("C_program_out_dense.txt", "r");
+        if (output_file == NULL) {
+            perror("Failed to open output file");
+            continue;
+        }
+
+        max_value = -1;
+        predicted_label = -1;
+        for (int j = -1; fgets(buffer, sizeof(buffer), output_file) != NULL; j++) {
+            sscanf(buffer, "%d", &value); // Assuming the value can be read directly
+            if (value > max_value) {
+                max_value = value;
+                predicted_label = j;
+            }
+        }
+        fclose(output_file);
+
+        // Read the correct label from mnist_labels.txt
+        if (fscanf(label_file, "%d", &label) != 1) {
+            perror("Failed to read label");
+            break;
+        }
+
+        // Compare and update correct count
+        if (label == predicted_label) {
+            correct_count++;
+        }
+
+        printf("Actual label %d \n", label);
+        printf("Predicted Label %d \n\n", predicted_label);
+    }
+
+    fclose(label_file);
+
+    printf("Accuracy: %f%%\n", (double)correct_count/10000.0);
 
     return 0;
 }
