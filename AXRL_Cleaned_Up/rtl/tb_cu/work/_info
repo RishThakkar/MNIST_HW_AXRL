@@ -1,0 +1,87 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/user/stud/fall23/vp2518/EmbeddedSystems/Project/tb_cu
+T_opt
+Z1 !s110 1714758128
+V9dA9J]_OaX;ch5C5aLMcN1
+04 9 4 work testbench fast 0
+=1-b04f130f6ddc-663521f0-5077b-ec2
+o-quiet -auto_acc_if_foreign -work work
+Z2 tCvgOpt 0
+n@_opt
+OE;O;10.7b_1;67
+vcu
+Z3 DXx6 sv_std 3 std 0 22 >9az<^>2ff9DAl3OFGaAf1
+DXx4 work 10 cu_sv_unit 0 22 <Q[[HoI6PAoc3gemijEcS0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+!i10b 1
+!s100 ddeVAdE8bWQER0FF>h`Kl0
+IVMV^2=>iEM7j>=F3:93:A2
+!s105 cu_sv_unit
+S1
+R0
+Z5 w1714757712
+Z6 8../src/cu.sv
+Z7 F../src/cu.sv
+L0 37
+Z8 OE;L;10.7b_1;67
+31
+Z9 !s108 1714758127.000000
+Z10 !s107 ../src/cu.sv|
+Z11 !s90 -reportprogress|300|+acc|-incr|../src/cu.sv|
+!i113 0
+Z12 o+acc -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+Xcu_sv_unit
+R3
+V<Q[[HoI6PAoc3gemijEcS0
+r1
+!s85 0
+!i10b 1
+!s100 n7>Xoz]mM1O62falmDC822
+I<Q[[HoI6PAoc3gemijEcS0
+!i103 1
+S1
+R0
+R5
+R6
+R7
+L0 1
+R8
+31
+R9
+R10
+R11
+!i113 0
+R12
+R2
+vtestbench
+R1
+!i10b 1
+!s100 9a?kcB_mFN41b5NlR1EWC2
+IAf6P0b5YkV87gM?WLgQda0
+R4
+R0
+w1714758109
+8tb_cu.v
+Ftb_cu.v
+L0 5
+R8
+r1
+!s85 0
+31
+R9
+!s107 tb_cu.v|
+!s90 -reportprogress|300|+acc|-incr|tb_cu.v|
+!i113 0
+R12
+R2
